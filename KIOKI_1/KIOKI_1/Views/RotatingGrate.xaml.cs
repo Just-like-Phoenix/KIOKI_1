@@ -71,8 +71,8 @@ namespace KIOKI_1.Views
 
             for (int i = 0; i < rank; i++)
             {
-                grid.RowDefinitions.Add(new RowDefinition() { Height = 90});
-                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 90});
+                grid.RowDefinitions.Add(new RowDefinition() { Height = 50});
+                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 50});
             }
 
             for (int i = 0; i < (int)stepper.Value; i++)

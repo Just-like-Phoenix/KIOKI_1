@@ -7,7 +7,9 @@
                  VerticalOptions="Center"
                  Orientation="Horizontal">
         <Grid BackgroundColor="white"
-              x:Name="grid"/>
+              x:Name="grid"
+              ColumnSpacing="1"
+              RowSpacing="1"/>
         <StackLayout VerticalOptions="CenterAndExpand">
             <Entry IsReadOnly="True"
                    x:Name="Rank"
