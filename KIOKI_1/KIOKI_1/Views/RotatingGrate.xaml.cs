@@ -16,6 +16,7 @@ namespace KIOKI_1.Views
         public RotatingGrate()
         {
             InitializeComponent();
+            Rank.Text = stepper.Value.ToString();
             stepper.ValueChanged += Stepper_ValueChanged;
             grid = FillGrid(grid, (int)stepper.Value);
         }
