@@ -4,9 +4,19 @@
              x:Class="KIOKI_1.Views.RotatingGrate">
 
     <StackLayout HorizontalOptions="Center"
-                 VerticalOptions="Center">
+                 VerticalOptions="Center"
+                 Orientation="Horizontal">
         <Grid BackgroundColor="white"
               x:Name="grid"/>
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Entry IsReadOnly="True"
+                   x:Name="Rank"
+                   HorizontalOptions="CenterAndExpand"/>
+            <Stepper Minimum="4"
+                     Increment="2"
+                     HorizontalOptions="CenterAndExpand"
+                     x:Name="stepper"/>
+        </StackLayout>
     </StackLayout>
     
     

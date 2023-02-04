@@ -13,12 +13,17 @@ namespace KIOKI_1.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RotatingGrate : ContentPage
     {
-        int rank = 4;
-
         public RotatingGrate()
         {
             InitializeComponent();
-            grid = FillGrid(grid, rank);
+            stepper.ValueChanged += Stepper_ValueChanged;
+            grid = FillGrid(grid, (int)stepper.Value);
+        }
+
+        private void Stepper_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            Rank.Text = stepper.Value.ToString();
+            grid = FillGrid(grid, (int)stepper.Value);
         }
 
         private void Btn_Clicked(object sender, EventArgs e)
@@ -34,7 +39,7 @@ namespace KIOKI_1.Views
             {
                 int tmp = row;
                 row = column;
-                column = rank - tmp - 1;
+                column = (int)stepper.Value - tmp - 1;
 
                 CustomButton btn = new CustomButton(row, column);
                 btn.Clicked += Btn_Clicked;
@@ -50,7 +55,7 @@ namespace KIOKI_1.Views
                     btn.BackgroundColor = Color.Gray;
                 }
 
-                int index = (btn.row * rank) + btn.column;
+                int index = (btn.row * (int)stepper.Value) + btn.column;
                 grid.Children.Remove(grid.Children.Single(x => (x as CustomButton).row == btn.row && (x as CustomButton).column == btn.column));
                 grid.Children.Add(btn, btn.column, btn.row);
             }
@@ -58,8 +63,10 @@ namespace KIOKI_1.Views
 
         private Grid FillGrid(Grid grid, int rank)
         {
-            grid.RowDefinitions = new RowDefinitionCollection();
-            grid.ColumnDefinitions = new ColumnDefinitionCollection();
+            grid.Children.Clear();
+
+            grid.RowDefinitions.Clear();
+            grid.ColumnDefinitions.Clear();
 
             for (int i = 0; i < rank; i++)
             {
@@ -67,9 +74,9 @@ namespace KIOKI_1.Views
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 90});
             }
 
-            for (int i = 0; i < rank; i++)
+            for (int i = 0; i < (int)stepper.Value; i++)
             {
-                for (int j = 0; j < rank; j++)
+                for (int j = 0; j < (int)stepper.Value; j++)
                 {
                     CustomButton tmp = new CustomButton(i, j);
                     tmp.BackgroundColor = Color.Blue;
