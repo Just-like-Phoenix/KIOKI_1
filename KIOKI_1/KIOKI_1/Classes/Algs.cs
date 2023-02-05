@@ -36,7 +36,7 @@ namespace KIOKI_1.Classes
             }
         }
 
-        /* методы сортировки изгородью */
+        /* методы для изгороди */
 
         private static char[,] getHedge(int messageLength, int key)
         {
@@ -136,7 +136,7 @@ namespace KIOKI_1.Classes
             return getDecryptedMessage(matrix, key);
         }
 
-        /* методы соритровки ключевой фразой */
+        /* методы для ключевой фразы */
 
         private static char[,] GetFilledKeyPhraseMatrix(char[,] matrix, string message)
         {
@@ -253,7 +253,7 @@ namespace KIOKI_1.Classes
             return GetDecryptedKeyPhraseMessage(refMatrix, msg);
         }
 
-        /* методы сортировки поворачивающейся решётки */
+        /* методы для поворачивающейся решётки */
 
         private static char[,] RotateGrate(char[,] grate)
         {
@@ -357,6 +357,41 @@ namespace KIOKI_1.Classes
             }
 
             return decryptedString;
+        }
+
+        /* методы для цезаря */
+
+        public static string CaesarEncrypt(string message, int key)
+        {
+            char[] encryptedMessage = new char[message.Length];
+
+            for (int i = 0; i < message.Length; i++) 
+            {
+                if (char.IsLetter(message[i]))
+                {
+                    char newLetter = (char)((int)message[i] > 1071 ? 1072 + (((int)message[i] - 1072 + key) % 32) : 1040 + (((int)message[i] - 1040 + key) % 32));
+                    encryptedMessage[i] = newLetter;
+                }
+                else encryptedMessage[i] = message[i];
+            }
+
+            return new string(encryptedMessage);
+        }
+        public static string CaesarDecrypt(string message, int key)
+        {
+            char[] decryptedMessage = new char[message.Length];
+
+            for (int i = 0; i < message.Length; i++)
+            {
+                if (char.IsLetter(message[i]))
+                {
+                    char newLetter = (char)((int)message[i] > 1071 ? 1072 + (((int)message[i] - 1072 + 32 - key) % 32) : 1040 + (((int)message[i] - 1040 + 32 - key) % 32));
+                    decryptedMessage[i] = newLetter;
+                }
+                else decryptedMessage[i] = message[i];
+            }
+
+            return new string (decryptedMessage);
         }
     }
 }
