@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace KIOKI_1.Classes
 {
-    class CustomButton : Button
+    public class CustomButton : Button
     {
         public int row { get; }
         public int column { get; }

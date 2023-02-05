@@ -269,17 +269,94 @@ namespace KIOKI_1.Classes
 
             return rotated;
         }
-
-        public static string RotatingGrateEncrypt(string message, Point[] cells)
+        private static char[,] GetFilledGrate(char[,] grate, string message)
         {
-            char[,] matrix = new char[4, 4];
+            for (int i = 0; i < grate.GetLength(0); i++)
+            {
+                for (int j = 0; j < grate.GetLength(1); j++)
+                {
+                    grate[i, j] = message[(i * grate.GetLength(0)) + j];
+                }
+            }
 
-            return null;
+            return grate;
         }
-        public static string RotatingGrateDecrypt(string message, int[] grate)
+        private static string EncryptSubstring(string substring, CustomButton[] cells)
         {
+            string encryptedSubstring = null;
 
-            return null;
+            char[,] grate = GetEmptyMatrix((int)Math.Sqrt(cells.Length * 4), (int)Math.Sqrt(cells.Length * 4));
+
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < cells.Length; j++)
+                {
+                    if ((i * cells.Length) + j > substring.Length - 1) grate[cells[j].row, cells[j].column] = ' ';
+                    else grate[cells[j].row, cells[j].column] = substring[(i * cells.Length) + j];
+                }
+                grate = RotateGrate(grate);
+            }
+
+            for (int i = 0; i < (int)Math.Sqrt(cells.Length * 4); i++)
+            {
+                for (int j = 0; j < (int)Math.Sqrt(cells.Length * 4); j++)
+                {
+                    encryptedSubstring += grate[i, j];
+                }
+            }
+
+            return encryptedSubstring;
+        }
+        private static string DecryptSubstring(string substring, CustomButton[] cells)
+        {
+            string decryptedSubstring = null;
+
+            char[,] grate = GetEmptyMatrix((int)Math.Sqrt(cells.Length * 4), (int)Math.Sqrt(cells.Length * 4));
+
+            for (int i = 0; i < (int)Math.Sqrt(cells.Length * 4); i++)
+            {
+                for (int j = 0; j < (int)Math.Sqrt(cells.Length * 4); j++)
+                {
+                    grate[i, j] = substring[(i * (int)Math.Sqrt(cells.Length * 4)) + j];
+                }
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < cells.Length; j++)
+                {
+                    decryptedSubstring += grate[cells[j].row, cells[j].column];
+                }
+                grate = RotateGrate(grate);
+            }
+
+            return decryptedSubstring;
+        }
+
+        public static string RotatingGrateEncrypt(string message, CustomButton[] cells)
+        {
+            string encryptedString = null;
+            int iterations = message.Length % ((cells.Length) * 4) > 0 ? message.Length / ((cells.Length) * 4) + 1 : message.Length / ((cells.Length) * 4);
+
+            for (int i = 0; i < iterations; i++)
+            {
+                if (message.Length - i * (cells.Length * 4) < cells.Length * 4) encryptedString += EncryptSubstring(message.Substring(i * (cells.Length * 4)), cells);
+                else encryptedString += EncryptSubstring(message.Substring(i * (cells.Length * 4), cells.Length * 4), cells);
+            }
+
+            return encryptedString;
+        }
+        public static string RotatingGrateDecrypt(string message, CustomButton[] cells)
+        {
+            string decryptedString = null;
+            int iterations = message.Length % ((cells.Length) * 4) > 0 ? message.Length / ((cells.Length) * 4) + 1 : message.Length / ((cells.Length) * 4);
+
+            for (int i = 0; i < iterations; i++)
+            {
+                decryptedString += DecryptSubstring(message.Substring(i * (cells.Length * 4)), cells);
+            }
+
+            return decryptedString;
         }
     }
 }

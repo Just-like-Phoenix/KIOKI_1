@@ -13,17 +13,43 @@ namespace KIOKI_1.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RotatingGrate : ContentPage
     {
+        List<CustomButton> cells;
+        int btnText;
+
         public RotatingGrate()
         {
             InitializeComponent();
-            Rank.Text = stepper.Value.ToString();
+            btnText = 1;
+            cells = new List<CustomButton>();
+            dimension.Text = stepper.Value.ToString();
             stepper.ValueChanged += Stepper_ValueChanged;
+            crypt.Clicked += Crypt_Clicked;
             grid = FillGrid(grid, (int)stepper.Value);
+        }
+
+        private void Crypt_Clicked(object sender, EventArgs e)
+        {
+            if (cells.Count == (int)(stepper.Value * stepper.Value) / 4)
+            {
+                if (rbcrypt.IsChecked)
+                {
+                    answer.Text = Algs.RotatingGrateEncrypt(msg.Text, cells.ToArray());
+                }
+                else if (!rbcrypt.IsChecked)
+                {
+                    answer.Text = Algs.RotatingGrateDecrypt(msg.Text, cells.ToArray());
+                }
+            }
+            else
+            {
+                DisplayAlert("Ошибка", "Введен неверный ключ!", "Ок");
+            }
         }
 
         private void Stepper_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            Rank.Text = stepper.Value.ToString();
+            dimension.Text = stepper.Value.ToString();
+            cells.Clear();
             grid = FillGrid(grid, (int)stepper.Value);
         }
 
@@ -34,7 +60,20 @@ namespace KIOKI_1.Views
 
             bool isSetted = (sender as CustomButton).Text == "" ? false : true;
 
-            (sender as CustomButton).Text = isSetted ? "" : "I";
+            if (isSetted)
+            {
+                cells.Remove(sender as CustomButton);
+                (sender as CustomButton).Text = "";
+                btnText--;
+            }
+            else
+            {
+                cells.Add(sender as CustomButton);
+                (sender as CustomButton).Text = btnText.ToString();
+                btnText++;
+            }
+
+            for (int i = 0; i < cells.Count; i++) cells[i].Text = (i + 1).ToString();
 
             for (int i = 0; i < 3; i++)
             {
@@ -62,14 +101,14 @@ namespace KIOKI_1.Views
             }
         }
 
-        private Grid FillGrid(Grid grid, int rank)
+        private Grid FillGrid(Grid grid, int dimension)
         {
             grid.Children.Clear();
 
             grid.RowDefinitions.Clear();
             grid.ColumnDefinitions.Clear();
 
-            for (int i = 0; i < rank; i++)
+            for (int i = 0; i < dimension; i++)
             {
                 grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Star});
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star});
