@@ -6,11 +6,20 @@
     <StackLayout HorizontalOptions="Center"
                  VerticalOptions="Center"
                  Orientation="Horizontal">
-        <Grid BackgroundColor="white"
-              x:Name="grid"
-              ColumnSpacing="1"
-              RowSpacing="1"/>
-        <StackLayout VerticalOptions="CenterAndExpand">
+        <StackLayout VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="Center"
+                     WidthRequest="300"
+                     HeightRequest="300">
+            <Grid BackgroundColor="white"
+                  x:Name="grid"
+                  ColumnSpacing="0.1"
+                  RowSpacing="0.1"
+                  HorizontalOptions="Fill"
+                  VerticalOptions="FillAndExpand"/>
+        </StackLayout>
+        
+        <StackLayout VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="Center">
             <Entry IsReadOnly="True"
                    x:Name="Rank"
                    HorizontalOptions="CenterAndExpand"/>
