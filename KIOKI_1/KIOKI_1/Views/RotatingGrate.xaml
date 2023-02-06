@@ -10,8 +10,7 @@
                      HorizontalOptions="Center"
                      WidthRequest="300"
                      HeightRequest="300">
-            <Grid BackgroundColor="white"
-                  x:Name="grid"
+            <Grid x:Name="grid"
                   ColumnSpacing="0.1"
                   RowSpacing="0.1"
                   HorizontalOptions="Fill"

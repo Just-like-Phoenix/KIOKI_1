@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -87,12 +88,11 @@ namespace KIOKI_1.Views
                 if (isSetted)
                 {
                     btn.IsEnabled = true;
-                    btn.BackgroundColor = Color.Blue;
+                    btn.Style = (Style)Application.Current.Resources["buttplug"];
                 }
                 else
                 {
                     btn.IsEnabled = false;
-                    btn.BackgroundColor = Color.Gray;
                 }
 
                 int index = (btn.row * (int)stepper.Value) + btn.column;
@@ -119,7 +119,8 @@ namespace KIOKI_1.Views
                 for (int j = 0; j < (int)stepper.Value; j++)
                 {
                     CustomButton tmp = new CustomButton(i, j);
-                    tmp.BackgroundColor = Color.Blue;
+                    tmp.Style = (Style)Application.Current.Resources["buttplug"];
+                    
                     tmp.Text = "";
                     tmp.Clicked += Btn_Clicked;
                     grid.Children.Add(tmp, j, i);

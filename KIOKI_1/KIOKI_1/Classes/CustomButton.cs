@@ -9,7 +9,6 @@ namespace KIOKI_1.Classes
     {
         public int row { get; }
         public int column { get; }
-        public bool wasPressed { get; }
 
         public CustomButton(int row, int column) : base()
         {
