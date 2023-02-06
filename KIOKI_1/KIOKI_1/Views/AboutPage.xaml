@@ -64,7 +64,6 @@
                 CornerRadius="20"
                 Grid.Row="1"
                 Grid.Column="1">
-            
         </Button>
 
         <!--switch-->

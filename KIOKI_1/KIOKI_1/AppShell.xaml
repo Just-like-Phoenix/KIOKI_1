@@ -30,8 +30,9 @@
     </Shell.Resources>
 
     <TabBar>
-        <ShellContent Title="Изгородь" Route="Hedge" ContentTemplate="{DataTemplate local:Hedge}" />
-        <ShellContent Title="Ключевая фраза" Route="KeyPhrase" ContentTemplate="{DataTemplate local:KeyPhrase}" />
+        <ShellContent Title="Изгородь" Route="Hedge" ContentTemplate="{DataTemplate local:Hedge}"/>
+        <ShellContent Title="Ключевая фраза" Route="KeyPhrase" ContentTemplate="{DataTemplate local:KeyPhrase}"/>
+        <ShellContent Title="Решётка" Route="RotatingGrate" ContentTemplate="{DataTemplate local:RotatingGrate}"/>
     </TabBar>
 
     <!--

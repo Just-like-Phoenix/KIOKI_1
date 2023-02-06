@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KIOKI_1.Views.RotatingGrate">
+
+    <StackLayout HorizontalOptions="Center"
+                 VerticalOptions="Center"
+                 Orientation="Horizontal">
+        <StackLayout VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="Center"
+                     WidthRequest="300"
+                     HeightRequest="300">
+            <Grid BackgroundColor="white"
+                  x:Name="grid"
+                  ColumnSpacing="0.1"
+                  RowSpacing="0.1"
+                  HorizontalOptions="Fill"
+                  VerticalOptions="FillAndExpand"/>
+        </StackLayout>
+
+        <StackLayout VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="Center">
+            <Entry IsReadOnly="True"
+                   x:Name="dimension"
+                   HorizontalOptions="CenterAndExpand"/>
+            <Stepper Minimum="4"
+                     Increment="2"
+                     HorizontalOptions="CenterAndExpand"
+                     x:Name="stepper"/>
+        </StackLayout>
+        <Grid HorizontalOptions="CenterAndExpand"
+          VerticalOptions="CenterAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <!--msg-key entry-->
+            <Label Text="Сообщение"
+               VerticalOptions="Center"
+               HorizontalOptions="End"
+               Grid.Row="0"
+               Grid.Column="0"/>
+            <Entry x:Name="msg"
+               Margin="10"
+               WidthRequest="450"
+               Grid.Row="0"
+               Grid.Column="1"
+               Grid.ColumnSpan="2">
+            </Entry>
+
+            <!--answer-->
+            <Label Text="Ответ"
+               VerticalOptions="Center"
+               HorizontalOptions="End"
+               Grid.Row="2"
+               Grid.Column="0"/>
+            <Entry x:Name="answer"
+               Margin="10"
+               WidthRequest="450"
+               Grid.Row="2"
+               Grid.Column="1"
+               Grid.ColumnSpan="2"
+               IsReadOnly="True">
+            </Entry>
+
+            <!--key entry-->
+            <Button x:Name="crypt" 
+                Text="Обработать"
+                WidthRequest="300"
+                CornerRadius="20"
+                Grid.Row="1"
+                Grid.Column="1">
+            </Button>
+
+            <!--switch-->
+            <StackLayout Grid.Row="3"
+                     Grid.Column="1">
+                <RadioButton x:Name="rbcrypt" Content="Шифрование" IsChecked="True"/>
+                <RadioButton Content="Дешифрование"/>
+            </StackLayout>
+
+
+        </Grid>
+    </StackLayout>
+</ContentPage>
