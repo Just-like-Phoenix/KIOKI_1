@@ -34,5 +34,11 @@ namespace KIOKI_1.Views
                 DisplayAlert("Ошибка","Введен неверный ключ!","Ок");
             }
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            rbcrypt.IsChecked = true;
+        }
     }
 }

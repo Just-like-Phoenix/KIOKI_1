@@ -129,5 +129,11 @@ namespace KIOKI_1.Views
 
             return grid;
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            rbcrypt.IsChecked = true;
+        }
     }
 }
