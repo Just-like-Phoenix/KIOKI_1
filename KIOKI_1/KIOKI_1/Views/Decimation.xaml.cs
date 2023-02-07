@@ -34,11 +34,15 @@ namespace KIOKI_1.Views
                 {
                     for (int j = 2; j < iterations * 2; j++)
                     {
-                        int gcd = Algs.GreatestCommonDivisor(i, j);
-                        if (gcd == 1 && (i * j) % 32 == 1)
+                        int fgcd = Algs.GreatestCommonDivisor(i, 32);
+                        int sgcd = Algs.GreatestCommonDivisor(j, 32);
+                        if (fgcd == 1 && sgcd == 1 && (i * j) % 32 == 1 && i != j)
                         {
-                            fkey = i;
-                            skey = j;
+                            if ((i - 1) % 32 != 0 && (j - 1) % 32 != 0)
+                            {
+                                fkey = i;
+                                skey = j;
+                            }
                         }
                     }
                 }
