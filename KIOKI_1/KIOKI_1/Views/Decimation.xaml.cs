@@ -24,26 +24,23 @@ namespace KIOKI_1.Views
         {
             int fkey = 0, skey = 0;
 
-            await Task.Run(() => 
+            await Task.Run(() =>
             {
                 Random random = new Random();
 
-                int iterations = random.Next(10, 250);
+                fkey = random.Next(2, 1000);
+                skey = random.Next(2, 1000);
 
-                for (int i = 2; i < iterations * 2; i++)
+                while (true)
                 {
-                    for (int j = 2; j < iterations * 2; j++)
+                    if ((fkey - 1) % 32 != 0 && (skey - 1) % 32 != 0 && Algs.GreatestCommonDivisor(fkey, 32) == 1 && Algs.GreatestCommonDivisor(skey, 32) == 1 && (fkey * skey) % 32 == 1 && fkey != skey)
                     {
-                        int fgcd = Algs.GreatestCommonDivisor(i, 32);
-                        int sgcd = Algs.GreatestCommonDivisor(j, 32);
-                        if (fgcd == 1 && sgcd == 1 && (i * j) % 32 == 1 && i != j)
-                        {
-                            if ((i - 1) % 32 != 0 && (j - 1) % 32 != 0)
-                            {
-                                fkey = i;
-                                skey = j;
-                            }
-                        }
+                        break;
+                    }
+                    else
+                    {
+                        fkey = random.Next(2, 1000);
+                        skey = random.Next(2, 1000);
                     }
                 }
             });
