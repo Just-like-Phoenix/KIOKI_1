@@ -363,35 +363,62 @@ namespace KIOKI_1.Classes
 
         public static string CaesarEncrypt(string message, int key)
         {
-            char[] encryptedMessage = new char[message.Length];
+            string encryptedMessage = null;
 
             for (int i = 0; i < message.Length; i++) 
             {
                 if (char.IsLetter(message[i]))
                 {
-                    char newLetter = (char)((int)message[i] > 1071 ? 1072 + (((int)message[i] - 1072 + key) % 32) : 1040 + (((int)message[i] - 1040 + key) % 32));
-                    encryptedMessage[i] = newLetter;
+                    encryptedMessage += (char)((int)message[i] > 1071 ? 1072 + (((int)message[i] - 1072 + key) % 32) : 1040 + (((int)message[i] - 1040 + key) % 32));
                 }
-                else encryptedMessage[i] = message[i];
+                else encryptedMessage += message[i];
             }
 
-            return new string(encryptedMessage);
+            return encryptedMessage;
         }
         public static string CaesarDecrypt(string message, int key)
         {
-            char[] decryptedMessage = new char[message.Length];
+            string decryptedMessage = null;
 
             for (int i = 0; i < message.Length; i++)
             {
                 if (char.IsLetter(message[i]))
                 {
-                    char newLetter = (char)((int)message[i] > 1071 ? 1072 + (((int)message[i] - 1072 + 32 - key) % 32) : 1040 + (((int)message[i] - 1040 + 32 - key) % 32));
-                    decryptedMessage[i] = newLetter;
+                    decryptedMessage += (char)((int)message[i] > 1071 ? 1072 + (((int)message[i] - 1072 + 32 - key) % 32) : 1040 + (((int)message[i] - 1040 + 32 - key) % 32));
                 }
-                else decryptedMessage[i] = message[i];
+                else decryptedMessage += message[i];
             }
 
-            return new string (decryptedMessage);
+            return decryptedMessage;
+        }
+
+        /* методы для децимации */
+
+        public static int GreatestCommonDivisor(int a, int b)
+        {
+            while (a != 0 && b != 0)
+            {
+                if (a > b) a = a % b;
+                else b = b % a;
+            }
+
+            return a + b;
+        }
+
+        public static string DecimationEncrypt(string message, int key)
+        {
+            string encryptedMessage = null;
+
+            for (int i = 0; i < message.Length; i++)
+            {
+                if (char.IsLetter(message[i]))
+                {
+                    encryptedMessage += (char)((int)message[i] > 1071 ? 1072 + ((((int)message[i] - 1072) * key) % 32) : 1040 + ((((int)message[i] - 1040) * key) % 32));
+                }
+                else encryptedMessage += message[i];
+            }
+
+            return encryptedMessage;
         }
     }
 }

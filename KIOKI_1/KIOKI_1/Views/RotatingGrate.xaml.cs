@@ -120,7 +120,8 @@ namespace KIOKI_1.Views
                 {
                     CustomButton tmp = new CustomButton(i, j);
                     tmp.Style = (Style)Application.Current.Resources["buttplug"];
-                    
+                    tmp.FontSize = 15;
+                    tmp.Padding = 0;
                     tmp.Text = "";
                     tmp.Clicked += Btn_Clicked;
                     grid.Children.Add(tmp, j, i);
@@ -128,6 +129,12 @@ namespace KIOKI_1.Views
             }
 
             return grid;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            rbcrypt.IsChecked = true;
         }
     }
 }

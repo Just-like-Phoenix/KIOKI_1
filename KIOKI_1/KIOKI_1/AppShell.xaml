@@ -34,6 +34,7 @@
         <ShellContent Title="Ключевая фраза" Route="KeyPhrase" ContentTemplate="{DataTemplate local:KeyPhrase}"/>
         <ShellContent Title="Решётка" Route="RotatingGrate" ContentTemplate="{DataTemplate local:RotatingGrate}"/>
         <ShellContent Title="Цезарь" Route="Caesar" ContentTemplate="{DataTemplate local:Caesar}"/>
+        <ShellContent Title="Децимация" Route="Decimation" ContentTemplate="{DataTemplate local:Decimation}"/>
     </TabBar>
 
     <!--

@@ -31,5 +31,11 @@ namespace KIOKI_1.Views
                 answer.Text = Algs.KeyPhraseDecrypt(msg.Text, key.Text);
             }
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            rbcrypt.IsChecked = true;
+        }
     }
 }

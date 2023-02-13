@@ -17,7 +17,7 @@ namespace KIOKI_1.Views
         {
             InitializeComponent();
             rbcrypt.IsChecked = true;
-            crypt.Clicked += Crypt_Clicked; ;
+            crypt.Clicked += Crypt_Clicked;
         }
 
         private void Crypt_Clicked(object sender, EventArgs e)
@@ -38,6 +38,12 @@ namespace KIOKI_1.Views
             {
                 DisplayAlert("Ошибка", "Введен неверный ключ!", "Ок");
             }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            rbcrypt.IsChecked = true;
         }
     }
 }
